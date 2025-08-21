@@ -25,7 +25,7 @@ def parse(pdf_path: str) -> Optional[pd.DataFrame]:
         df = pd.DataFrame(rows, columns=SCHEMA)
         if 'Description' in df.columns:
             df['Description'] = df['Description'].astype(str).str.replace('T o', 'To', regex=False)
-        # Coerce only numeric columns; keep Date/Description as strings
+        # Coerce only numeric columns
         for c in ['Debit Amt', 'Credit Amt', 'Balance']:
             if c in df.columns:
                 df[c] = pd.to_numeric(df[c].astype(str).str.replace(',', ''), errors="coerce")
